@@ -8,6 +8,7 @@ class Encoder(torch.nn.Module):
         
         # Define the layer dimensions
         self.layer_dimensions = [input_dim] + layer_dimensions
+        self.z_dist_dim = int(self.layer_dimensions[-1]/2)
 
         self.num_layers = len(self.layer_dimensions) - 1 
         # Initialize an empty list to hold the layers
@@ -28,7 +29,6 @@ class Encoder(torch.nn.Module):
 
     def forward(self, x):
         # Pass the input through the model
-        a = self.model(x)
-
-        z_mean, z_log_var = a[:,:2], a[:,2:] 
+        z_dist_params = self.model(x)
+        z_mean, z_log_var = z_dist_params[:, :self.z_dist_dim], z_dist_params[:, self.z_dist_dim:] 
         return  z_mean, z_log_var
