@@ -8,7 +8,7 @@ def read_requirements():
         return [line.strip() for line in f if line.strip() and not line.startswith("#")]
 
 setup(
-    name="your_package_name",
+    name="VAE",
     version="0.1.0",
     package_dir={"": "src"},  # Specify 'src' as the root directory for packages
     packages=find_packages(where="src"),  # Find packages inside 'src'
